@@ -8,6 +8,34 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+
+// ================================
+// LOGIN (rota inicial "/")
+// ================================
+app.post("/", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email e senha são obrigatórios" });
+    }
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      return res.status(401).json({ error: "Usuário ou senha não correspondentes" });
+    }
+
+    res.json({ message: "Login feito", user: data.user });
+  } catch (err) {
+    res.status(500).json({ error: "Erro no servidor: " + err.message });
+  }
+});
+
+
 // ================================
 // ROTAS LIVROS
 // ================================
