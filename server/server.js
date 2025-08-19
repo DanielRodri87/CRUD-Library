@@ -1,25 +1,25 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { createClient } = require("@supabase/supabase-js");
+const supabase = require("./supabaseClient");
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Conexão Supabase
-const supabaseUrl = "https://rzxbiyksprouzsowwnwn.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ6eGJpeWtzcHJvdXpzb3d3bnduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1MzU2MDYsImV4cCI6MjA3MTExMTYwNn0.buBHjAIYGr8V_P9GFPGtI0_1dWsFXevMxMUepVuchu0";
-const supabase = createClient(supabaseUrl, supabaseKey);
+// ================================
+// ROTAS LIVROS
+// ================================
 
-// Rota para inserir livros
+// Inserir livro
 app.post("/livros", async (req, res) => {
   try {
-    const { titulo, autor, num_pag, ano_pub } = req.body;
+    const { titulo, autor, num_pag, ano_pub, image } = req.body;
 
     const { data, error } = await supabase
       .from("livros")
-      .insert([{ titulo, autor, num_pag, ano_pub, flag_sucesso: "OK" }]);
+      .insert([{ titulo, autor, num_pag, ano_pub, image, flag_sucesso: "OK" }]);
 
     if (error) return res.status(400).json({ error: error.message });
 
@@ -29,7 +29,7 @@ app.post("/livros", async (req, res) => {
   }
 });
 
-// Rota para listar livros
+// Listar todos os livros (todos os campos)
 app.get("/livros", async (req, res) => {
   const { data, error } = await supabase.from("livros").select("*");
 
@@ -38,6 +38,60 @@ app.get("/livros", async (req, res) => {
   res.json(data);
 });
 
-app.listen(3000, () => {
-  console.log("🚀 Servidor rodando em http://localhost:3000");
+// Exibir livros (somente id, titulo, autor)
+app.get("/livros/exibir", async (req, res) => {
+  const { data, error } = await supabase.from("livros").select("id, titulo, autor");
+
+  if (error) return res.status(400).json({ error: error.message });
+
+  res.json(data);
+});
+
+// Editar livro pelo id
+app.put("/livros/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { titulo, autor, num_pag, ano_pub, image } = req.body;
+
+    const { data, error } = await supabase
+      .from("livros")
+      .update({ titulo, autor, num_pag, ano_pub, image })
+      .eq("id", id)
+      .select("*");
+
+    if (error) return res.status(400).json({ error: error.message });
+    if (!data || data.length === 0) return res.status(404).json({ message: "Livro não encontrado" });
+
+    res.json({ message: "Livro atualizado!", data });
+  } catch (err) {
+    res.status(500).json({ error: "Erro no servidor: " + err.message });
+  }
+});
+
+// Remover livro pelo id
+app.delete("/livros/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { data, error } = await supabase
+      .from("livros")
+      .delete()
+      .eq("id", id)
+      .select("*");
+
+    if (error) return res.status(400).json({ error: error.message });
+    if (!data || data.length === 0) return res.status(404).json({ message: "Livro não encontrado" });
+
+    res.json({ message: "Livro removido!", data });
+  } catch (err) {
+    res.status(500).json({ error: "Erro no servidor: " + err.message });
+  }
+});
+
+// ================================
+// INICIAR SERVIDOR
+// ================================
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 });

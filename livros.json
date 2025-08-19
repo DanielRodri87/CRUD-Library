@@ -2,5 +2,6 @@
   "titulo": "Meu diario",
   "autor": "Daniel Rodrigues",
   "num_pag": 1909,
-  "ano_pub": 2025
+  "ano_pub": 2025,
+  "imagem": "https://example.com/imagem.jpg"
 }
