@@ -1,0 +1,29 @@
+{
+  "name": "crud-library",
+  "version": "1.0.0",
+  "description": "# Supabase Express App",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server/server.js",
+    "start": "node server/server.js"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielRodri87/CRUD-Library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielRodri87/CRUD-Library/issues"
+  },
+  "homepage": "https://github.com/DanielRodri87/CRUD-Library#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.55.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
