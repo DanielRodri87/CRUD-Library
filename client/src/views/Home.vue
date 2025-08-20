@@ -13,7 +13,7 @@
       <hr />
 
       <!-- Botão para cadastrar -->
-      <button @click="mode = 'add'">Cadastrar Livro</button>
+      <button @click="$router.push('/cadastro')">Cadastrar Livro</button>
       <button v-if="mode !== 'list'" @click="mode = 'list'">Home</button>
 
       <hr />
@@ -41,20 +41,9 @@
           </ul>
         </div>
       </div>
+      
+  
 
-      <!-- CADASTRAR -->
-      <div v-if="mode === 'add'">
-        <h3>Cadastrar Livro</h3>
-        <form @submit.prevent="addLivro">
-          <input v-model="form.titulo" placeholder="Título" required />
-          <input v-model="form.autor" placeholder="Autor" required />
-          <input v-model.number="form.num_pag" placeholder="Páginas" type="number" required />
-          <input v-model="form.ano_pub" placeholder="Ano de Publicação" required />
-          <input v-model="form.image" placeholder="URL da Imagem" required />
-          <button type="submit">Cadastrar</button>
-        </form>
-        <p v-if="message">{{ message }}</p>
-      </div>
 
       <!-- EDITAR -->
       <div v-if="mode === 'edit'">
