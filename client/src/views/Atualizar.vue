@@ -5,14 +5,12 @@
       <img :src="fundo" alt="Fundo" class="fundo" />
       <img :src="bookIcon" alt="Livro" class="book-icon" />
     </div>
-  <div class="barra-meio">
-    <div class="linha"></div>
-  </div>
+    <div class="barra-meio"></div>
 
     <!-- Lado direito com formulário -->
     <div class="lado-direito">
-      <h2>Cadastrar Livro</h2>
-      <form @submit.prevent="addLivro" class="formulario">
+      <h2>Editar Livro</h2>
+      <form @submit.prevent="$emit('editar-livro')" class="formulario">
         <label>
           Título
           <input v-model="form.titulo" placeholder="Informe o título" required />
@@ -30,15 +28,15 @@
 
         <label>
           Ano
-          <input v-model.number="form.ano_pub" placeholder="Informe o ano de publicação" type="number" min="0" required />
+          <input v-model.number="form.ano_pub" placeholder="Informe o ano de publicação" type="number" min="0" />
         </label>
 
         <label>
           URL da Capa
-          <input v-model="form.image" placeholder="Informe a URL da capa" type="url" required />
+          <input v-model="form.image" placeholder="Informe a URL da capa" type="url" />
         </label>
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Salvar Alterações</button>
       </form>
       <p v-if="message" class="message">{{ message }}</p>
     </div>
@@ -46,109 +44,80 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import bookIcon from '../../assets/bookicon.png'; // <-- Importação correta da imagem
-import fundo from '../../assets/fundo.png'; // <-- Importação correta da imagem
+import { defineProps, defineEmits } from "vue";
+import bookIcon from '../../assets/bookicon.png';
+import fundo from '../../assets/fundo.png';
 
-const form = ref({
-  titulo: "",
-  autor: "",
-  num_pag: null,
-  ano_pub: null,
-  image: "",
+const props = defineProps({
+  form: Object,
+  message: String,
 });
 
-const message = ref("");
-
-const addLivro = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/livros", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form.value),
-    });
-    const data = await res.json();
-    if (res.ok) {
-      message.value = data.message || "Livro cadastrado com sucesso!";
-      resetForm();
-    } else {
-      message.value = data.error || "Erro ao cadastrar livro.";
-    }
-  } catch {
-    message.value = "Erro ao conectar ao servidor.";
-  }
-};
-
-const resetForm = () => {
-  form.value = { titulo: "", autor: "", num_pag: null, ano_pub: null, image: "" };
-};
+const emit = defineEmits(["editar-livro"]);
 </script>
 
 <style scoped>
-/* Mantém o mesmo CSS do seu código anterior */
+/* Same CSS as provided in the original template */
 .container {
-display: flex;
-position: fixed;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-background-color: #f6f5f2;
-box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-z-index: 9999;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f5f2;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  z-index: 9999;
 }
 
 .lado-esquerdo {
-  position: relative; /* <- importante para limitar o fundo */
+  position: relative;
   background-color: #A9927D;
   flex: 1.5;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* evita que o fundo “vaze” */
+  overflow: hidden;
 }
 
 .lado-direito {
- 
-flex: 190px;
-padding: 40px 40px 190px 190px;
-display: flex;
-flex-direction: column;
-
+  flex: 190px;
+  padding: 40px 40px 190px 190px;
+  display: flex;
+  flex-direction: column;
 }
+
 .fundo {
   position: absolute;
   top: -10;
-  left: 0;
   left: -30%;
-  width: 180%;   /* aumenta o tamanho em relação ao container */
+  width: 180%;
   height: 180%;
   object-fit: cover;
-  z-index: 0; /* atrás do ícone */
-  transform: scale(1.1); /* aumenta visualmente */
+  z-index: 0;
+  transform: scale(1.1);
   opacity: 0.45;
 }
 
 .book-icon {
   width: 350px;
   height: auto;
-  z-index: 1; /* ícone acima do fundo */
+  z-index: 1;
 }
-
-
 
 .lado-direito h2 {
   font-size: 28px;
   margin-bottom: 30px;
   color: #22333b;
 }
+
 .barra-meio {
   position: absolute;
   top: 25%;
   bottom: 25%;
   left: 50%;
-  width: 520px; /* aumentada a largura */
-  left: calc(50% - 350px); /* move metade da largura para a esquerda */
+  width: 520px;
+  left: calc(50% - 350px);
   right: 54%;
   background: #f6f5f2;
   z-index: 0;
@@ -177,7 +146,6 @@ flex-direction: column;
   margin-top: 6px;
   padding: 12px;
   border: 1.5px solid #22333b;
-
   font-size: 16px;
   transition: border-color 0.2s;
 }
@@ -189,14 +157,13 @@ flex-direction: column;
 
 .formulario button {
   margin-top: 20px;
-  padding: 14px; 
+  padding: 14px;
   max-width: 450px;
   background-color: #22333b;
   color: white;
   font-size: 16px;
   font-weight: 600;
   border: none;
-  
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -221,21 +188,18 @@ flex-direction: column;
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* empilha no celular */
-    min-height: auto;       /* cresce conforme o conteúdo */
+    flex-direction: column;
+    min-height: auto;
     height: auto;
   }
   .lado-esquerdo {
-    height: 220px; /* define altura do topo */
+    height: 220px;
   }
   .lado-direito {
     padding: 20px;
   }
   .barra-meio {
-    display: none; /* some no mobile */
-  }
-  .lado-direito {
-    padding: 20px;
+    display: none;
   }
   .lado-direito h2 {
     font-size: 22px;
@@ -259,5 +223,4 @@ flex-direction: column;
     padding: 10px;
   }
 }
-
 </style>
