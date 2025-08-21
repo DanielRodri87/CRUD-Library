@@ -1,96 +1,17 @@
-.horse-logo {
-  width: 50px;
-  height: 50px;
-  font-size: 2rem;
-}<template>
+<template>
   <div class="biblioteca-container">
     <!-- Header -->
     <header class="header">
       <div class="header-content">
         <div class="header-container">
-          <div class="horse-logo">🐴</div>
+          <div class="horse-logo">
+            <img src="/home/ritar0drigues/Downloads/icon cavalo.png" alt="Logo" style="width: 60px; height: 90px;" />
+          </div>
           <div class="title-container">
-            <h1 class="title" :style="titleStyle">BIBLIOTECA</h1>
-            <div class="typography-controls">
-              <button @click="showTypographyPanel = !showTypographyPanel" class="typography-btn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M9,4V7H14V19H17V7H22V4H9M3,4V7H8V19H11V7H16V4H3Z"/>
-                </svg>
-              </button>
-              
-              <!-- Painel de controles de tipografia -->
-              <div v-if="showTypographyPanel" class="typography-panel">
-                <div class="typography-section">
-                  <label>Font Family</label>
-                  <select v-model="typography.fontFamily" @change="updateTitleStyle">
-                    <option value="'Inria Serif', serif">Inria Serif</option>
-                    <option value="'Arial', sans-serif">Arial</option>
-                    <option value="'Times New Roman', serif">Times New Roman</option>
-                    <option value="'Georgia', serif">Georgia</option>
-                    <option value="'Helvetica', sans-serif">Helvetica</option>
-                    <option value="'Courier New', monospace">Courier New</option>
-                    <option value="'Impact', sans-serif">Impact</option>
-                  </select>
-                </div>
-
-                <div class="typography-section">
-                  <label>Font Weight</label>
-                  <select v-model="typography.fontWeight" @change="updateTitleStyle">
-                    <option value="100">Thin</option>
-                    <option value="200">Extra Light</option>
-                    <option value="300">Light</option>
-                    <option value="400">Normal</option>
-                    <option value="500">Medium</option>
-                    <option value="600">Semi Bold</option>
-                    <option value="700">Bold</option>
-                    <option value="800">Extra Bold</option>
-                    <option value="900">Black</option>
-                  </select>
-                </div>
-
-                <div class="typography-section">
-                  <label>Font Size: {{ typography.fontSize }}px</label>
-                  <input 
-                    type="range" 
-                    v-model.number="typography.fontSize" 
-                    min="16" 
-                    max="80" 
-                    step="2"
-                    @input="updateTitleStyle"
-                    class="typography-slider"
-                  />
-                </div>
-
-                <div class="typography-section">
-                  <label>Letter Spacing: {{ typography.letterSpacing }}em</label>
-                  <input 
-                    type="range" 
-                    v-model.number="typography.letterSpacing" 
-                    min="0" 
-                    max="1" 
-                    step="0.05"
-                    @input="updateTitleStyle"
-                    class="typography-slider"
-                  />
-                </div>
-
-                <div class="typography-section">
-                  <label>Line Height</label>
-                  <select v-model="typography.lineHeight" @change="updateTitleStyle">
-                    <option value="0.8">Tight</option>
-                    <option value="1">Normal</option>
-                    <option value="1.2">Relaxed</option>
-                    <option value="1.5">Loose</option>
-                  </select>
-                </div>
-
-                <div class="typography-actions">
-                  <button @click="resetTypography" class="reset-btn">Reset</button>
-                </div>
-              </div>
-            </div>
+            <h1 class="title" :style="titleStyle">BIBLIOTECA</h1>   
           </div>
         </div>
+
     <div v-if="user" class="user-section">
       <span class="welcome-text">{{ user.email }}</span>
       <button @click="logout" class="logout-btn">Sair</button>
@@ -315,7 +236,7 @@
         </form>
       </section>
 
-      <!-- BOTÕES DO FOOTER REMOVIDOS -->
+    
     </main>
   </div>
 </template>
@@ -345,32 +266,6 @@ const typography = ref({
   letterSpacing: 0.2,
   lineHeight: 1
 });
-
-// Estilo computado para o título
-const titleStyle = ref({});
-
-// Atualizar estilo do título
-const updateTitleStyle = () => {
-  titleStyle.value = {
-    fontFamily: typography.value.fontFamily,
-    fontWeight: typography.value.fontWeight,
-    fontSize: `${typography.value.fontSize}px`,
-    letterSpacing: `${typography.value.letterSpacing}em`,
-    lineHeight: typography.value.lineHeight
-  };
-};
-
-// Reset da tipografia
-const resetTypography = () => {
-  typography.value = {
-    fontFamily: "'Inria Serif', serif",
-    fontWeight: "300",
-    fontSize: 32,
-    letterSpacing: 0.2,
-    lineHeight: 1
-  };
-  updateTitleStyle();
-};
 
 // formulário usado em add/edit
 const form = ref({
@@ -546,7 +441,7 @@ const logout = () => {
 
 .biblioteca-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: (135deg, #f5f7fa 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -562,9 +457,16 @@ const logout = () => {
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Alinha à esquerda */
   align-items: center;
   position: relative;
+}
+
+.horse-logo {
+  width: 73px;
+  height: 90px;
+  font-size: 2rem;
+ 
 }
 
 .header-container {
@@ -572,15 +474,21 @@ const logout = () => {
   align-items: center;
   gap: 1rem;
   position: relative;
+  flex: 1;
 }
 
 .title-container {
-  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .title {
   margin: 0;
   transition: all 0.3s ease;
+  font-family: 'Inria Serif', serif;
+  font-weight: bold;
+  font-size: 3rem; 
 }
 
 .typography-controls {
@@ -844,7 +752,7 @@ const logout = () => {
   min-height: 300px;
   cursor: pointer;
   border: 2px dashed #ccc;
-  background: #f9f9f9;
+  background: #ffffff;
 }
 
 .add-card:hover {
