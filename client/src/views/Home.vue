@@ -12,7 +12,6 @@
       <button @click="logout">Sair</button>
       <hr />
 
-      <!-- Botão para cadastrar -->
       <button @click="$router.push('/cadastro')">Cadastrar Livro</button>
       <button v-if="mode !== 'list'" @click="mode = 'list'">Home</button>
 
@@ -24,16 +23,15 @@
         <div v-if="loading">Carregando livros...</div>
         <div v-else>
           <div v-if="livros.length === 0">Nenhum livro encontrado.</div>
-
           <ul>
             <li v-for="livro in livros" :key="livro.id">
               <h4>{{ livro.titulo }}</h4>
               <p>Autor: {{ livro.autor }}</p>
               <p>Páginas: {{ livro.num_pag }}</p>
               <img :src="livro.image" alt="Capa do livro" width="100" />
-
               <div>
-                <button @click="prepareEdit(livro)">Atualizar</button>
+                <button @click="prepareEdit(livro)">Editar</button>
+                
                 <button @click="deleteLivro(livro.id)">Remover</button>
               </div>
               <hr />
@@ -41,22 +39,14 @@
           </ul>
         </div>
       </div>
-      
-  
-
 
       <!-- EDITAR -->
       <div v-if="mode === 'edit'">
-        <h3>Editar Livro</h3>
-        <form @submit.prevent="editLivro">
-          <input v-model="form.titulo" placeholder="Título" required />
-          <input v-model="form.autor" placeholder="Autor" required />
-          <input v-model.number="form.num_pag" placeholder="Páginas" type="number" required />
-          <input v-model="form.ano_pub" placeholder="Ano de Publicação" required />
-          <input v-model="form.image" placeholder="URL da Imagem" required />
-          <button type="submit">Salvar Alterações</button>
-        </form>
-        <p v-if="message">{{ message }}</p>
+       <Atualizar
+          :form="form"
+          :message="message"
+          @editar-livro="editLivro"
+        />
       </div>
     </div>
   </div>
@@ -65,6 +55,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import Atualizar from "./Atualizar.vue";
 
 const router = useRouter();
 const livros = ref([]);
@@ -131,7 +122,7 @@ const addLivro = async () => {
   }
 };
 
-// preparar edição
+//preparar edição
 const prepareEdit = (livro) => {
   form.value = { ...livro };
   mode.value = "edit";
