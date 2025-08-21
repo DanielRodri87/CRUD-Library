@@ -5,7 +5,7 @@
       <div class="header-content">
         <div class="header-container">
           <div class="horse-logo">
-            <img src="/home/ritar0drigues/Downloads/icon cavalo.png" alt="Logo" style="width: 60px; height: 90px;" />
+            <img src="/home/ritar0drigues/Downloads/icon cavalo.png" alt="Logo" />
           </div>
           <div class="title-container">
             <h1 class="title" :style="titleStyle">BIBLIOTECA</h1>   
@@ -448,7 +448,7 @@ const logout = () => {
 .header {
   background: #B8A18A;
   color: white;
-  padding: 1rem 0;
+  padding: 2.5rem 0 3.5rem 0;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
@@ -457,16 +457,15 @@ const logout = () => {
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
-  justify-content: flex-start; /* Alinha à esquerda */
   align-items: center;
   position: relative;
 }
 
 .horse-logo {
-  width: 73px;
-  height: 90px;
-  font-size: 2rem;
- 
+  width: 120px;
+  height: 150px;
+  display: flex;
+
 }
 
 .header-container {
@@ -488,7 +487,7 @@ const logout = () => {
   transition: all 0.3s ease;
   font-family: 'Inria Serif', serif;
   font-weight: bold;
-  font-size: 3rem; 
+  font-size: 5rem; 
 }
 
 .typography-controls {
@@ -609,8 +608,6 @@ const logout = () => {
 }
 
 .user-section {
-  position: absolute;
-  right: 0;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -624,7 +621,7 @@ const logout = () => {
   background: rgba(255,255,255,0.2);
   color: white;
   border: 1px solid rgba(255,255,255,0.3);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 3rem;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
