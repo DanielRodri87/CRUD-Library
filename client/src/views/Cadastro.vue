@@ -209,4 +209,55 @@ flex-direction: column;
   margin-top: 12px;
   color: #d9534f;
 }
+
+@media (max-width: 1024px) {
+  .book-icon {
+    width: 200px;
+  }
+  .lado-direito h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* empilha no celular */
+    min-height: auto;       /* cresce conforme o conteúdo */
+    height: auto;
+  }
+  .lado-esquerdo {
+    height: 220px; /* define altura do topo */
+  }
+  .lado-direito {
+    padding: 20px;
+  }
+  .barra-meio {
+    display: none; /* some no mobile */
+  }
+  .lado-direito {
+    padding: 20px;
+  }
+  .lado-direito h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+  .formulario {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-icon {
+    width: 150px;
+  }
+  .lado-direito h2 {
+    font-size: 20px;
+  }
+  .formulario input,
+  .formulario button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
 </style>
