@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <button class="btn-voltar" @click="$router.push('/home')">⬅ Voltar</button>
     <!-- Lado esquerdo com ícone -->
     <div class="lado-esquerdo">
       <img :src="fundo" alt="Fundo" class="fundo" />
@@ -41,6 +42,10 @@
         <button type="submit">Cadastrar</button>
       </form>
       <p v-if="message" class="message">{{ message }}</p>
+       <div v-if="message" class="message">
+          <img src="../../assets/cabalo feliz.png" class="image" />
+          <p>{{ message }}</p>
+        </div>
     </div>
   </div>
 </template>
@@ -205,9 +210,73 @@ flex-direction: column;
   background-color: #5952d4;
 }
 
+.image {
+  width: 60px;
+  height: 80px;
+  margin-bottom: 16px;
+}
+
+
 .message {
-  margin-top: 12px;
-  color: #d9534f;
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #4d3221;
+  border-radius: 10px;
+  padding: 60px 40px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 10000;
+  min-width: 280px;
+  text-align: center;
+  animation: grow-fade 2s forwards;
+}
+.btn-voltar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #22333b;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10001;
+  transition: background 0.2s;
+}
+
+.btn-voltar:hover {
+  background: #5952d4;
+}
+
+
+
+
+@keyframes grow-fade {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.7);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.08);
+  }
+  40% {
+    transform: translateX(-50%) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(1);
+  }
 }
 
 @media (max-width: 1024px) {

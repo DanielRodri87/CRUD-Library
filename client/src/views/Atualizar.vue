@@ -37,11 +37,15 @@
         </label>
 
         <button type="submit">Salvar Alterações</button>
-      </form>
-      <p v-if="message" class="message">{{ message }}</p>
+        <div v-if="message" class="message">
+          <img src="../../assets/cabalo feliz.png" class="image" />
+          <p>{{ message }}</p>
+        </div>
+            </form>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { defineProps, defineEmits } from "vue";
@@ -54,10 +58,20 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["editar-livro"]);
+
+
 </script>
+
 
 <style scoped>
 /* Same CSS as provided in the original template */
+
+.image {
+  width: 60px;
+  height: 80px;
+  margin-bottom: 16px;
+}
+
 .container {
   display: flex;
   position: fixed;
@@ -173,8 +187,43 @@ const emit = defineEmits(["editar-livro"]);
 }
 
 .message {
-  margin-top: 12px;
-  color: #d9534f;
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #4d3221;
+  border-radius: 10px;
+  padding: 60px 40px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 10000;
+  min-width: 280px;
+  text-align: center;
+  animation: grow-fade 2s forwards;
+}
+
+@keyframes grow-fade {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.7);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.08);
+  }
+  40% {
+    transform: translateX(-50%) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(1);
+  }
 }
 
 @media (max-width: 1024px) {
@@ -224,3 +273,4 @@ const emit = defineEmits(["editar-livro"]);
   }
 }
 </style>
+

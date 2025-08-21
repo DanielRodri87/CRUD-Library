@@ -130,6 +130,7 @@ const prepareEdit = (livro) => {
 
 // editar livro
 const editLivro = async () => {
+  message.value = ""; // Limpa a mensagem ao iniciar edição
   try {
     const res = await fetch(`http://localhost:3000/livros/${form.value.id}`, {
       method: "PUT",
@@ -139,9 +140,12 @@ const editLivro = async () => {
     const data = await res.json();
     if (res.ok) {
       message.value = data.message;
-      await loadLivros();
-      resetForm();
-      mode.value = "list";
+      setTimeout(async () => {
+        await loadLivros();
+        resetForm();
+        mode.value = "list";
+        message.value = ""; // Limpa a mensagem após voltar para list
+      }, 1000);
     } else {
       message.value = data.error;
     }
