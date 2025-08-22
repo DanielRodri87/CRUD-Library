@@ -35,12 +35,12 @@
         >
           Home
         </button>
-        <button 
+        <!-- <button 
           @click="$router.push('/cadastro')" 
           class="nav-btn"
         >
           Cadastrar Livro
-        </button>
+        </button> -->
       </nav>
 
       <!-- Mensagem de feedback -->

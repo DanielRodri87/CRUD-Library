@@ -8,7 +8,50 @@ Uma aplicação web completa para gerenciamento de biblioteca pessoal, desenvolv
 - **CRUD de Livros**: Criar, visualizar, editar e excluir livros da biblioteca
 - **Interface Responsiva**: Design adaptável para desktop e mobile
 - **Gerenciamento de Capas**: Suporte a URLs de imagens para capas dos livros
-- **Busca e Filtros**: Visualização organizada da biblioteca pessoal
+
+## 📱 Interface da Aplicação
+
+### 🔐 Autenticação
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <h4>🚪 Tela de Login</h4>
+      <img src="printscreen/login.png" alt="Tela de Login" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      <br><em>Interface de entrada com design limpo e intuitivo</em>
+    </td>
+    <td align="center" width="50%">
+      <h4>📝 Tela de Cadastro</h4>
+      <img src="printscreen/signup.png" alt="Tela de Cadastro" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      <br><em>Formulário de registro para novos usuários</em>
+    </td>
+  </tr>
+</table>
+
+### 📖 Gerenciamento de Livros
+
+<div align="center">
+  <h4>🏠 Dashboard Principal</h4>
+  <img src="printscreen/home.png" alt="Página Principal" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;">
+  <br><em>Visualização em grid da biblioteca pessoal com opções de gerenciamento</em>
+</div>
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <h4>➕ Cadastrar Livro</h4>
+      <img src="printscreen/cadastrarlivro.png" alt="Cadastrar Livro" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      <br><em>Formulário completo para adicionar novos livros</em>
+    </td>
+    <td align="center" width="50%">
+      <h4>✏️ Editar Livro</h4>
+      <img src="printscreen/editar.png" alt="Editar Livro" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+      <br><em>Interface para atualização de informações dos livros</em>
+    </td>
+  </tr>
+</table>
+
+---
 
 ## 🏗️ Arquitetura do Projeto
 
@@ -34,6 +77,12 @@ CRUD-Library/
 │   ├── server.js            # Servidor principal
 │   ├── supabaseClient.js    # Cliente Supabase
 │   └── package.json
+├── printscreen/              # Screenshots da aplicação
+│   ├── cadastrarlivro.png
+│   ├── editar.png
+│   ├── home.png
+│   ├── login.png
+│   └── signup.png
 ├── .env                     # Variáveis de ambiente
 ├── package.json             # Scripts principais
 └── README.md
@@ -104,7 +153,6 @@ CREATE TABLE livros (
   ano_pub INTEGER,
   image TEXT,
   flag_sucesso VARCHAR(10) DEFAULT 'OK',
-  created_at TIMESTAMP DEFAULT NOW()
 );
 ```
 
@@ -202,14 +250,6 @@ curl http://localhost:3000/livros
 - `npm run dev` - Servidor com nodemon (auto-reload)
 - `npm start` - Servidor de produção
 
-## 📱 Responsividade
-
-A aplicação é totalmente responsiva, adaptando-se a:
-- Desktop (1200px+)
-- Tablet (768px - 1024px)
-- Mobile (480px - 768px)
-- Mobile pequeno (<480px)
-
 ## 🔒 Autenticação e Segurança
 
 - Autenticação gerenciada pelo Supabase
@@ -217,37 +257,14 @@ A aplicação é totalmente responsiva, adaptando-se a:
 - Proteção de rotas no frontend
 - Validação de dados no backend
 
-## 🚀 Deploy
+## 👨‍💻 Autores
 
-### Frontend (Netlify/Vercel)
-```bash
-cd client
-npm run build
-# Deploy da pasta dist/
-```
+**Daniel Rodrigues** - [DanielRodri87](https://github.com/DanielRodri87)  
+**Walison Weudes** - [WalisonWeudes](https://github.com/WalisonWeudes)  
+**Rita de Cássia** - [ritar0drigues](https://github.com/ritar0drigues)
 
-### Backend (Heroku/Railway)
-```bash
-# Configurar variáveis de ambiente
-# Deploy da pasta server/
-```
+---
 
-## 🤝 Contribuindo
-
-1. Faça o fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está sob a licença ISC. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 👨‍💻 Autor
-
-**Daniel Rodrigues** - [DanielRodri87](https://github.com/DanielRodri87)
-
-## 📞 Suporte
-
-Se você encontrar algum problema ou tiver dúvidas, abra uma [issue](https://github.com/DanielRodri87/CRUD-Library/issues) no GitHub.
+<div align="center">
+  <p>Desenvolvido com ❤️ para gerenciar sua biblioteca pessoal</p>
+</div>
