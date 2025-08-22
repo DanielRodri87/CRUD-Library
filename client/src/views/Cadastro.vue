@@ -4,10 +4,10 @@
     <!-- Lado esquerdo com ícone -->
     <div class="lado-esquerdo">
       <img :src="fundo" alt="Fundo" class="fundo" />
-      <img :src="bookIcon" alt="Livro" class="book-icon" />
     </div>
   <div class="barra-meio">
     <div class="linha"></div>
+    <img :src="bookIcon" alt="Livro" class="book-icon" />
   </div>
 
     <!-- Lado direito com formulário -->
@@ -106,21 +106,22 @@ z-index: 9999;
 .lado-esquerdo {
   position: relative; /* <- importante para limitar o fundo */
   background-color: #A9927D;
-  flex: 1.5;
+  width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* evita que o fundo “vaze” */
+  overflow: hidden; /* evita que o fundo "vaze" */
 }
 
 .lado-direito {
- 
-flex: 190px;
-padding: 40px 40px 190px 190px;
-display: flex;
-flex-direction: column;
-
+  width: 60%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 .fundo {
   position: absolute;
   top: -10;
@@ -137,54 +138,56 @@ flex-direction: column;
 .book-icon {
   width: 350px;
   height: auto;
-  z-index: 1; /* ícone acima do fundo */
+  z-index: 10; /* ícone acima da barra branca */
+  position: relative;
 }
-
-
 
 .lado-direito h2 {
   font-size: 28px;
   margin-bottom: 30px;
   color: #22333b;
+  text-align: center;
 }
+
 .barra-meio {
   position: absolute;
-  top: 25%;
-  bottom: 25%;
-  left: 50%;
-  width: 520px; /* aumentada a largura */
-  left: calc(50% - 350px); /* move metade da largura para a esquerda */
-  right: 54%;
+  top: 30%;
+  bottom: 20%;
+  left: 14%; /* Movido para a borda dos 40% */
+  width: 700px; /* Reduzido para ficar mais centrado na divisão */
+  height: 400px;
   background: #f6f5f2;
-  z-index: 0;
-  transform: translateX(-50%);
-  pointer-events: none;
-  border-top-left-radius: 154px;
-  border-bottom-left-radius: 154px;
+  z-index: 5;
+  /* border-radius: 150px; Ajustado proporcionalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .formulario {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .formulario label {
   display: flex;
-  max-width: 450px;
-  width: 100%;
   flex-direction: column;
   font-weight: 600;
   color: #22333b;
+  font-size: 16px;
 }
 
 .formulario input {
-  margin-top: 6px;
-  padding: 12px;
-  border: 1.5px solid #22333b;
-
+  margin-top: 8px;
+  padding: 16px;
+  border: 2px solid #22333b;
+  border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.2s;
+  width: 100%;
 }
 
 .formulario input:focus {
@@ -193,15 +196,14 @@ flex-direction: column;
 }
 
 .formulario button {
-  margin-top: 20px;
-  padding: 14px; 
-  max-width: 450px;
+  margin-top: 24px;
+  padding: 16px;
   background-color: #22333b;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   border: none;
-  
+  border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -215,7 +217,6 @@ flex-direction: column;
   height: 80px;
   margin-bottom: 16px;
 }
-
 
 .message {
   position: fixed;
@@ -234,6 +235,7 @@ flex-direction: column;
   text-align: center;
   animation: grow-fade 2s forwards;
 }
+
 .btn-voltar {
   position: absolute;
   top: 20px;
@@ -253,9 +255,6 @@ flex-direction: column;
 .btn-voltar:hover {
   background: #5952d4;
 }
-
-
-
 
 @keyframes grow-fade {
   0% {
@@ -281,37 +280,38 @@ flex-direction: column;
 
 @media (max-width: 1024px) {
   .book-icon {
-    width: 200px;
+    width: 250px;
   }
   .lado-direito h2 {
     font-size: 24px;
+  }
+  .barra-meio {
+    width: 250px;
+    left: 30%;
+    border-radius: 125px;
   }
 }
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* empilha no celular */
-    min-height: auto;       /* cresce conforme o conteúdo */
+    flex-direction: column;
+    min-height: auto;
     height: auto;
   }
   .lado-esquerdo {
-    height: 220px; /* define altura do topo */
+    height: 200px;
   }
   .lado-direito {
     padding: 20px;
   }
   .barra-meio {
-    display: none; /* some no mobile */
-  }
-  .lado-direito {
-    padding: 20px;
+    display: none;
   }
   .lado-direito h2 {
     font-size: 22px;
-    text-align: center;
   }
   .formulario {
-    align-items: center;
+    max-width: 100%;
   }
 }
 
@@ -325,8 +325,7 @@ flex-direction: column;
   .formulario input,
   .formulario button {
     font-size: 14px;
-    padding: 10px;
+    padding: 12px;
   }
 }
-
 </style>
