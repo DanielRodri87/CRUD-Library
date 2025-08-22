@@ -2,6 +2,9 @@
 
 Uma aplicação web completa para gerenciamento de biblioteca pessoal, desenvolvida com Vue.js 3 no frontend e Node.js/Express no backend, utilizando Supabase como banco de dados.
 
+[![Vídeo no YouTube](https://img.youtube.com/vi/KbMZGc9SPq4/0.jpg)](https://youtu.be/KbMZGc9SPq4?si=xzRkNph9itY5TnmI)
+
+
 ## 🎯 Funcionalidades
 
 - **Autenticação de Usuários**: Sistema completo de login e cadastro
